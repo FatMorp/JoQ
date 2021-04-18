@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "552744967101",
+    "project_id": "joq-uses",
+    "storage_bucket": "joq-uses.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552744967101:android:e95f945a5375fb746cd0d4",
+        "android_client_info": {
+          "package_name": "com.example.fragmentactivity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "552744967101-9ft297c4qp4tjnc3qcdfi656naf2k297.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxaRUXCasKN9bKfs4OLVxGxrkuyxnMo3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "552744967101-9ft297c4qp4tjnc3qcdfi656naf2k297.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
