@@ -8,16 +8,24 @@
     tools:context=".auth.login.LoginFragment">
 
 
-    <Button
-        android:id="@+id/button_sign_up"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up" />
+        android:text="JoQ"
+        android:textAlignment="center"
+        android:textSize="72sp" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/button_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/home" />
+        android:layout_marginTop="30px"
+        android:text="@string/login" />
 
 </LinearLayout>

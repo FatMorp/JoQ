@@ -1,3 +1,12 @@
 package com.example.fragmentactivity.core.domain
 
-data class User()
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+
+@Parcelize
+data class User(
+        val id: String,
+        val name: String,
+        val city: String
+) : Parcelable

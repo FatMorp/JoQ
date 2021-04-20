@@ -5,9 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.fragmentactivity.HomeFragmentDirections
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fragmentactivity.auth.login.LoginFragmentDirections
+
+import com.example.fragmentactivity.core.domain.User
 import com.example.fragmentactivity.databinding.FragmentHomeBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import java.util.ArrayList
 
 class HomeFragment : Fragment() {
 
@@ -15,7 +21,6 @@ class HomeFragment : Fragment() {
 
     private val binding
         get() = _binding!!
-
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -33,10 +38,30 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val list = ArrayList<User>()
+        val adapter = UserListAdapter()
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
 
-        binding.buttonToDetail.setOnClickListener {
+        val fireStore = FirebaseFirestore.getInstance()
+        fireStore.collection("users").get().addOnSuccessListener {
+            querySnapShot -> querySnapShot.forEach {
+                document -> list.add(
+            User(
+                document.id,
+                document.getString("name") ?: "",
+                document.getString("city") ?: ""
+            )
+                )
+             }
+            adapter.submitList(list)
+            }.addOnFailureListener {
+            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+            }
+
+        binding.imageButton.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
             findNavController().navigate(action)
         }
+        }
     }
-}
