@@ -11,25 +11,26 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.fragmentactivity.R
 import com.example.fragmentactivity.databinding.FragmentLoginBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment()  {
 
     private var _binding : FragmentLoginBinding? = null
 
     private val binding
     get() = _binding!!
+    private val RC_SIGN_IN = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding.root
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -37,12 +38,12 @@ class LoginFragment : Fragment() {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        findViewById(R.id.sign_in_button).setOnClickListener(this)
+        return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-        val account: GoogleSignInAccount = GoogleSignIn.getLastSignedInAccount(this)
+        val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(requireContext())
         updateUI(account)
     }
 
@@ -51,7 +52,7 @@ class LoginFragment : Fragment() {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-    override fun onClick(v: View) {
+    fun onClick(v: View) {
         when (v.id) {
             R.id.sign_in_button -> signIn()
         }
@@ -65,7 +66,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonHome.setOnClickListener {
+        binding.signInButton.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
             findNavController().navigate(action)
         }
@@ -77,6 +78,11 @@ class LoginFragment : Fragment() {
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
         }
+    }
+
+    private fun updateUI {
+        val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+        findNavController().navigate(action)
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
