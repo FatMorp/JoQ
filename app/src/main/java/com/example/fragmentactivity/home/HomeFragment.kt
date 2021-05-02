@@ -59,9 +59,5 @@ class HomeFragment : Fragment() {
             Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
 
-        binding.imageButton.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
-            findNavController().navigate(action)
-        }
         }
     }
