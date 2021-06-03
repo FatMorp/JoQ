@@ -32,6 +32,7 @@ class UserRecyclerAdapter(private val users: ArrayList<User>) :
                 }
             }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {

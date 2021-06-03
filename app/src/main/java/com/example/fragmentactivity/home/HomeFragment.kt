@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.fragmentactivity.auth.login.LoginFragmentDirections
 
 import com.example.fragmentactivity.core.domain.User
@@ -50,7 +51,8 @@ class HomeFragment : Fragment() {
             User(
                 document.id,
                 document.getString("name") ?: "",
-                document.getString("city") ?: ""
+                document.getString("city") ?: "",
+                    document.getString("photoUrl") ?: ""
             )
                 )
              }
@@ -58,9 +60,9 @@ class HomeFragment : Fragment() {
             }.addOnFailureListener {
             Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
-
-        binding.imageButton.setOnClickListener {
+        adapter.onItemClicked = {
             val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
+            action.user = it
             findNavController().navigate(action)
         }
         }

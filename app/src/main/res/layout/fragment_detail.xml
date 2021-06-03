@@ -9,19 +9,20 @@
     tools:context=".home.DetailFragment">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/foto_org"
         android:layout_width="530dp"
         android:layout_height="260dp"
         tools:src="@tools:sample/avatars" />
 
     <TextView
+        android:id="@+id/nama_org"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name Example"
         android:textSize="24sp"/>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/lokasi_org"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Location"

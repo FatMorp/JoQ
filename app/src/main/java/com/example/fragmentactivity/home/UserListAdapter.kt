@@ -13,6 +13,8 @@ import com.example.fragmentactivity.databinding.ItemUserRecyclerViewBinding
 
 class UserListAdapter : ListAdapter<User, UserListAdapter.UserViewHolder>(USER_DIFF_UTIL) {
 
+    var onItemClicked: ((User) -> Unit)? = null
+
     inner class UserViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val binding = ItemUserRecyclerViewBinding.bind(itemView)
         fun bind(item: User) {
